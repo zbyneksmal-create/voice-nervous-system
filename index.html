@@ -1,19 +1,79 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   <title>Stabilizace</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#000000" />
+
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      font-weight: 500;
+      margin-bottom: 40px;
+      letter-spacing: 0.02em;
+    }
+
+    button {
+      margin-top: 40px;
+      padding: 14px 28px;
+      font-size: 16px;
+      background: #111;
+      color: #fff;
+      border: 1px solid #444;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
 </head>
 
-<body style="font-family: sans-serif; text-align: center; padding: 40px;">
-
+<body>
   <h1>Stabilizace</h1>
 
-  <audio controls>
+  <audio id="audio" preload="auto">
     <source src="stabilizace.mp3" type="audio/mpeg">
-    Tvůj prohlížeč nepodporuje audio přehrávání.
   </audio>
 
+  <button id="restartBtn">Spustit znovu</button>
+
+  <script>
+    const audio = document.getElementById("audio");
+    const restartBtn = document.getElementById("restartBtn");
+
+    // pokus o automatické spuštění (funguje po interakci / na některých mobilech)
+    window.addEventListener("load", () => {
+      audio.play().catch(() => {
+        // prohlížeč může chtít první klik – je to v pořádku
+      });
+    });
+
+    restartBtn.addEventListener("click", () => {
+      audio.currentTime = 0;
+      audio.play();
+    });
+  </script>
 </body>
 </html>
