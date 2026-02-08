@@ -17,7 +17,7 @@ This project documents:
 ---
 
 ## What this is not
-- Not therapy
+- Not psychotherapy or clinical treatment
 - Not diagnosis
 - Not self-help motivation
 - Not a medical product
