@@ -54,6 +54,16 @@ to allow one clear next action.
 - **Night-reset**
   Reduces cognitive overactivity to allow rest or sleep onset.
 
+---
+
+## Micro-case example
+
+**Context:** Acute mental overload with physical tension and inability to proceed.
+**Intervention:** 75-second Stabilize intervention (slow tempo, long pauses).
+**Immediate effect:** Noticeable reduction of tension and clearer perception.
+**Outcome (10 min):** Able to complete one postponed practical task.
+**Note:** Shorter duration proved more effective than longer guidance.
+
 
 ## Status
 Early-stage documentation and field testing.
