@@ -17,19 +17,19 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      gap: 16px;
+      gap: 14px;
+      text-align: center;
     }
 
     h1 {
       font-weight: 500;
-      margin-bottom: 24px;
       letter-spacing: 0.02em;
+      margin-bottom: 28px;
     }
 
     a {
       width: 260px;
       padding: 14px;
-      text-align: center;
       text-decoration: none;
       color: #fff;
       border: 1px solid #444;
@@ -38,35 +38,63 @@
       font-size: 16px;
     }
 
+    a:active {
+      transform: scale(0.98);
+    }
+
     footer {
       position: absolute;
       bottom: 16px;
       font-size: 12px;
       opacity: 0.5;
-      text-align: center;
       max-width: 300px;
+    }
+
+    footer a {
+      border: none;
+      background: none;
+      padding: 0;
+      font-size: 12px;
+      text-decoration: underline;
     }
   </style>
 </head>
 
 <body>
-  <h1>Vyber jedno</h1>
 
-  <a href="./stabilize/">Stabilize</a>
-  <a href="./re-orient/">Re-orient</a>
-  <a href="./release/">Release</a>
-  <a href="./transition/">Transition</a>
-  <a href="./night-reset/">Night reset</a>
+  <h1>Když se zasekneš</h1>
+
+  <a href="./stabilize/" onclick="track('stabilize')">
+    Zastavit přetížení
+  </a>
+
+  <a href="./re-orient/" onclick="track('re-orient')">
+    Zorientovat se
+  </a>
+
+  <a href="./transition/" onclick="track('transition')">
+    Udělat další krok
+  </a>
+
+  <a href="./night-reset/" onclick="track('night-reset')">
+    Uklidnit před spánkem
+  </a>
 
   <footer>
-    Not therapy. Not diagnosis.<br />
+    Není terapie. Není diagnóza.<br />
     <a href="#" onclick="support()">Podpořit projekt</a>
   </footer>
 
   <script>
+    function track(type) {
+      // připraveno pro analytiku (později GA / Plausible / vlastní log)
+      console.log("selected:", type);
+    }
+
     function support() {
       alert("Díky. Odkaz na podporu přidáme později.");
     }
   </script>
+
 </body>
 </html>
