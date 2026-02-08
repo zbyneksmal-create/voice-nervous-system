@@ -32,6 +32,28 @@ Reduce internal overload just enough
 to allow one clear next action.
 
 ---
+---
+
+## Intervention types
+
+- **Stabilize**
+  Short intervention to reduce acute internal overload and stop escalation.
+
+- **Re-orient**
+  Helps restore basic orientation and attention to the present moment.
+
+- **Release**
+  Focused on releasing localized physical tension (jaw, shoulders, breath).
+
+- **Transition**
+  Supports moving from paralysis or hesitation into a clear next step.
+
+- **Pre-load**
+  Prepares the nervous system before interaction, task, or performance.
+
+- **Night-reset**
+  Reduces cognitive overactivity to allow rest or sleep onset.
+
 
 ## Status
 Early-stage documentation and field testing.
