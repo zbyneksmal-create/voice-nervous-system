@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <title>Transition</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      margin-bottom: 40px;
+    }
+
+    button {
+      margin-top: 40px;
+      padding: 14px 28px;
+      font-size: 16px;
+      background: #111;
+      color: #fff;
+      border: 1px solid #444;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Transition</h1>
+
+  <audio id="audio" preload="auto">
+    <source src="transition.mp3" type="audio/mpeg">
+  </audio>
+
+  <button id="restartBtn">Spustit znovu</button>
+
+  <script>
+    const audio = document.getElementById("audio");
+    const restartBtn = document.getElementById("restartBtn");
+
+    window.addEventListener("load", () => {
+      audio.play().catch(() => {});
+    });
+
+    restartBtn.addEventListener("click", () => {
+      audio.currentTime = 0;
+      audio.play();
+    });
+  </script>
+</body>
+</html>
