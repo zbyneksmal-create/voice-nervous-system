@@ -1,107 +1,57 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="theme-color" content="#000000" />
-<title>Stabilizace</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#000000">
+<title>Klid</title>
 
 <style>
-  body {
-    margin: 0;
-    background: #000;
-    color: #fff;
-    font-family: system-ui, -apple-system, sans-serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
+body {
+  margin: 0;
+  background: #000;
+  color: #fff;
+  font-family: system-ui, -apple-system, sans-serif;
+}
 
-  .wrapper {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 16px;
-    gap: 20px;
-  }
+.wrapper {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
 
-  /* univerzální senior tlačítko */
-  .block {
-    width: 100%;
-    padding: 26px;
-    font-size: 28px;
-    font-weight: 700;
-    border-radius: 16px;
-    border: 2px solid #333;
-    background: #111;
-    color: #fff;
-    text-align: center;
-  }
+.item {
+  display: block;
+  padding: 26px;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 18px;
+  border: 2px solid #333;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+}
 
-  .block:active {
-    transform: scale(0.98);
-  }
-
-  /* název – stejný styl jako tlačítko */
-  .title {
-    background: #000;
-    border: 2px solid #333;
-  }
-
-  /* spodní ovládání */
-  .controls {
-    padding: 24px 16px;
-  }
-
-  .play {
-    padding: 36px;
-    font-size: 32px;
-    font-weight: 800;
-  }
+.item:active {
+  transform: scale(0.98);
+}
 </style>
 </head>
 
 <body>
 
-  <div class="wrapper">
+<div class="wrapper">
 
-    <!-- ZPĚT DO MENU -->
-    <a href="../" class="block">← Zpět do menu</a>
+  <a class="item" href="./re-orient/">Zorientovat se</a>
+  <a class="item" href="./release/">Uvolnit napětí</a>
+  <a class="item" href="./transition/">Další krok</a>
+  <a class="item" href="./night-reset/">Klid před spánkem</a>
 
-    <!-- NÁZEV -->
-    <div class="block title">Stabilizace</div>
-
-    <!-- klidový prostor -->
-    <div style="flex:1;"></div>
-
-  </div>
-
-  <!-- OVLÁDÁNÍ DOLE -->
-  <div class="controls">
-    <button id="play" class="block play">SPUSTIT</button>
-  </div>
-
-  <audio id="audio" preload="auto">
-    <source src="stabilize.mp3" type="audio/mpeg" />
-  </audio>
-
-<script>
-  const audio = document.getElementById("audio");
-  const btn = document.getElementById("play");
-  let playing = false;
-
-  btn.onclick = () => {
-    if (!playing) {
-      audio.play();
-      btn.textContent = "PAUZA";
-      playing = true;
-    } else {
-      audio.pause();
-      btn.textContent = "SPUSTIT";
-      playing = false;
-    }
-  };
-</script>
+</div>
 
 </body>
 </html>
