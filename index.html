@@ -7,72 +7,88 @@
   <meta name="theme-color" content="#000000" />
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
+      min-height: 100vh;
       background: #000;
       color: #fff;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
       gap: 14px;
       text-align: center;
     }
 
     h1 {
+      font-size: 18px;
       font-weight: 500;
-      letter-spacing: 0.02em;
-      margin-bottom: 28px;
+      margin-bottom: 18px;
+      opacity: 0.9;
     }
 
-    a {
-      width: 260px;
-      padding: 14px;
-      text-decoration: none;
-      color: #fff;
-      border: 1px solid #444;
-      border-radius: 10px;
-      background: #111;
-      font-size: 16px;
+    .item {
       display: block;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid #333;
+      background: #111;
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      transition: transform 0.05s ease, background 0.2s ease;
     }
 
-    a:active {
-      transform: scale(0.98);
+    .item:active {
+      transform: scale(0.97);
+    }
+
+    .item:hover {
+      background: #161616;
     }
 
     footer {
-      position: absolute;
-      bottom: 16px;
+      margin-top: 20px;
       font-size: 12px;
       opacity: 0.5;
-      max-width: 300px;
+      line-height: 1.4;
     }
 
     footer a {
-      border: none;
-      background: none;
-      padding: 0;
-      font-size: 12px;
+      color: #aaa;
       text-decoration: underline;
     }
   </style>
 </head>
 
 <body>
-  <h1>Když se zasekneš</h1>
+  <div class="container">
 
-  <a href="./stabilize/">Zastavit přetížení</a>
-  <a href="./re-orient/">Zorientovat se</a>
-  <a href="./release/">Uvolnit napětí</a>
-  <a href="./transition/">Udělat další krok</a>
-  <a href="./night-reset/">Uklidnit před spánkem</a>
+    <h1>Když se zasekneš</h1>
 
-  <footer>
-    Není terapie. Není diagnóza.<br />
-    <a href="#">Podpořit projekt</a>
-  </footer>
+    <a class="item" href="./stabilize/">Zastavit přetížení</a>
+    <a class="item" href="./re-orient/">Zorientovat se</a>
+    <a class="item" href="./release/">Uvolnit napětí</a>
+    <a class="item" href="./transition/">Udělat další krok</a>
+    <a class="item" href="./night-reset/">Uklidnit před spánkem</a>
+
+    <footer>
+      Není terapie. Není diagnóza.<br />
+      <a href="#">Podpořit projekt</a>
+    </footer>
+
+  </div>
 </body>
 </html>
