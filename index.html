@@ -1,19 +1,78 @@
-<a href="./stabilize/" onclick="track('stabilize')">
-  Zastavit přetížení
-</a>
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <title>voice nervous system</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
 
-<a href="./re-orient/" onclick="track('re-orient')">
-  Zorientovat se
-</a>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      gap: 14px;
+      text-align: center;
+    }
 
-<a href="./release/" onclick="track('release')">
-  Uvolnit napětí
-</a>
+    h1 {
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      margin-bottom: 28px;
+    }
 
-<a href="./transition/" onclick="track('transition')">
-  Udělat další krok
-</a>
+    a {
+      width: 260px;
+      padding: 14px;
+      text-decoration: none;
+      color: #fff;
+      border: 1px solid #444;
+      border-radius: 10px;
+      background: #111;
+      font-size: 16px;
+      display: block;
+    }
 
-<a href="./night-reset/" onclick="track('night-reset')">
-  Uklidnit před spánkem
-</a>
+    a:active {
+      transform: scale(0.98);
+    }
+
+    footer {
+      position: absolute;
+      bottom: 16px;
+      font-size: 12px;
+      opacity: 0.5;
+      max-width: 300px;
+    }
+
+    footer a {
+      border: none;
+      background: none;
+      padding: 0;
+      font-size: 12px;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Když se zasekneš</h1>
+
+  <a href="./stabilize/">Zastavit přetížení</a>
+  <a href="./re-orient/">Zorientovat se</a>
+  <a href="./release/">Uvolnit napětí</a>
+  <a href="./transition/">Udělat další krok</a>
+  <a href="./night-reset/">Uklidnit před spánkem</a>
+
+  <footer>
+    Není terapie. Není diagnóza.<br />
+    <a href="#">Podpořit projekt</a>
+  </footer>
+</body>
+</html>
