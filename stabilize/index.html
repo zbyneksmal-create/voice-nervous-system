@@ -2,9 +2,9 @@
 <html lang="cs">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <meta name="theme-color" content="#000000">
-<title>Zastavit přetížení</title>
+<title>Stabilizace</title>
 
 <style>
 body {
@@ -14,76 +14,67 @@ body {
   font-family: system-ui, sans-serif;
 }
 
-/* horní lišta */
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 64px;
-  background: #000;
+/* horní lišta – název + zpět */
+.top {
+  padding: 16px;
   border-bottom: 1px solid #222;
   display: flex;
   align-items: center;
-  padding: 0 12px;
-  z-index: 10;
+  gap: 12px;
 }
 
 .back {
-  font-size: 26px;
-  color: #fff;
+  font-size: 28px;
   text-decoration: none;
-  padding: 8px 12px;
+  color: #fff;
 }
 
-/* hlavní obsah */
+.title {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+/* obsah */
 .container {
-  margin-top: 80px;
-  padding: 16px;
+  padding: 24px 16px;
   max-width: 360px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   text-align: center;
-}
-
-h1 {
-  font-size: 24px;
-  margin-bottom: 32px;
 }
 
 button {
   width: 100%;
-  padding: 20px;
-  margin-bottom: 16px;
+  padding: 22px;
+  margin-bottom: 18px;
   font-size: 22px;
-  border-radius: 14px;
+  border-radius: 16px;
   border: 1px solid #333;
   background: #111;
   color: #fff;
 }
 
 button:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
 }
 </style>
 </head>
 
 <body>
 
-<!-- horní lišta -->
-<div class="header">
+<!-- horní část -->
+<div class="top">
   <a class="back" href="../" aria-label="Zpět do menu">⬅</a>
+  <div class="title">Stabilizace</div>
 </div>
 
-<!-- obsah -->
+<!-- hlavní část -->
 <div class="container">
 
-<h1>Zastavit přetížení</h1>
-
-<button id="playPause">▶ Přehrát</button>
+<button id="play">▶ Spustit</button>
+<button id="pause">⏸ Pauza</button>
 <button id="stop">⏹ Zastavit</button>
 
-<audio id="audio" preload="auto">
+<audio id="audio">
   <source src="stabilize.mp3" type="audio/mpeg">
 </audio>
 
@@ -91,29 +82,19 @@ button:active {
 
 <script>
 const audio = document.getElementById("audio");
-const playPause = document.getElementById("playPause");
-const stopBtn = document.getElementById("stop");
 
-let playing = false;
+document.getElementById("play").onclick = () => {
+  audio.play();
+};
 
-playPause.addEventListener("click", () => {
-  if (!playing) {
-    audio.play();
-    playPause.textContent = "⏸ Pauza";
-    playing = true;
-  } else {
-    audio.pause();
-    playPause.textContent = "▶ Přehrát";
-    playing = false;
-  }
-});
+document.getElementById("pause").onclick = () => {
+  audio.pause();
+};
 
-stopBtn.addEventListener("click", () => {
+document.getElementById("stop").onclick = () => {
   audio.pause();
   audio.currentTime = 0;
-  playPause.textContent = "▶ Přehrát";
-  playing = false;
-});
+};
 </script>
 
 </body>
