@@ -24,101 +24,47 @@ body {
   flex-direction: column;
 }
 
-/* horní oblast */
-.top {
-  padding: 24px 16px;
-  display: flex;
-  justify-content: center;
-}
-
+.top { padding: 24px 16px; display: flex; justify-content: center; }
 .back {
-  display: block;
-  width: 100%;
-  max-width: 420px;
-  padding: 22px;
-  font-size: 26px;
-  font-weight: 700;
-  text-align: center;
-  border: 2px solid var(--border);
-  border-radius: 16px;
-  background: var(--card);
-  color: var(--fg);
-  text-decoration: none;
+  display: block; width: 100%; max-width: 420px; padding: 22px;
+  font-size: 26px; font-weight: 700; text-align: center;
+  border: 2px solid var(--border); border-radius: 16px;
+  background: var(--card); color: var(--fg); text-decoration: none;
 }
 
-/* střed */
-.middle {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+.middle { flex: 1; display: flex; align-items: center; justify-content: center; }
+.title { font-size: 28px; font-weight: 700; text-align: center; }
 
-.title {
-  font-size: 28px;
-  font-weight: 700;
-  text-align: center;
-}
-
-/* spodní oblast */
-.bottom {
-  padding: 24px 16px 32px;
-}
-
-.controls {
-  max-width: 420px;
-  margin: 0 auto;
-}
+.bottom { padding: 24px 16px 32px; }
+.controls { max-width: 420px; margin: 0 auto; }
 
 .play {
-  width: 100%;
-  padding: 32px;
-  font-size: 34px;
-  font-weight: 800;
-  border-radius: 20px;
-  border: 2px solid var(--border);
-  background: var(--card);
-  color: var(--fg);
+  width: 100%; padding: 32px; font-size: 34px; font-weight: 800;
+  border-radius: 20px; border: 2px solid var(--border);
+  background: var(--card); color: var(--fg);
 }
+.play:active { transform: scale(0.97); }
 
-.play:active {
-  transform: scale(0.97);
-}
-
-.hint {
-  margin-top: 14px;
-  font-size: 18px;
-  opacity: 0.85;
-  text-align: center;
-}
-
-audio {
-  display: none;
-}
+.hint { margin-top: 14px; font-size: 18px; opacity: 0.85; text-align: center; }
+audio { display: none; }
 </style>
 </head>
 
 <body>
-
-<!-- ZPĚT DO MENU -->
 <div class="top">
   <a class="back" href="../">← Zpět do menu</a>
 </div>
 
-<!-- NÁZEV -->
 <div class="middle">
   <div class="title">Uklidnit před spánkem</div>
 </div>
 
-<!-- OVLÁDÁNÍ DOLE -->
 <div class="bottom">
   <div class="controls">
     <button id="toggle" class="play">SPUSTIT</button>
-    <div class="hint">
-      Klepni 1×: spustit · Klepni znovu: pauza
-    </div>
+    <div class="hint">Klepni 1×: spustit · Klepni znovu: pauza</div>
     <audio id="audio" preload="auto">
-      <source src="pred-spanim.mp3" type="audio/mpeg">
+      <source src="night-reset.mp3" type="audio/mpeg">
     </audio>
   </div>
 </div>
@@ -128,33 +74,18 @@ const audio = document.getElementById("audio");
 const btn = document.getElementById("toggle");
 let playing = false;
 
-function update() {
-  btn.textContent = playing ? "PAUZA" : "SPUSTIT";
-}
+function update(){ btn.textContent = playing ? "PAUZA" : "SPUSTIT"; }
 
 btn.addEventListener("click", async () => {
   try {
-    if (!playing) {
-      await audio.play();
-      playing = true;
-    } else {
-      audio.pause();
-      playing = false;
-    }
+    if (!playing) { await audio.play(); playing = true; }
+    else { audio.pause(); playing = false; }
     update();
-  } catch (e) {
-    playing = false;
-    update();
-  }
+  } catch(e){ playing = false; update(); }
 });
 
-audio.addEventListener("ended", () => {
-  playing = false;
-  update();
-});
-
+audio.addEventListener("ended", () => { playing = false; update(); });
 update();
 </script>
-
 </body>
 </html>
