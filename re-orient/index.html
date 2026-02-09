@@ -1,76 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="cs">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Re-orient</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- PWA -->
-  <link rel="manifest" href="../manifest.json" />
-  <meta name="theme-color" content="#000000" />
-
+  <meta name="theme-color" content="#0b0f14">
   <style>
     body {
       margin: 0;
-      background: #000;
-      color: #fff;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
+      background: #0b0f14;
+      color: #e7eef7;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
     }
-
+    .wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 20px;
+    }
     h1 {
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      margin-bottom: 40px;
+      margin: 0 0 8px;
+      font-size: 22px;
     }
-
+    p {
+      margin: 0 0 16px;
+      color: #b7c6da;
+      line-height: 1.5;
+    }
     button {
-      margin-top: 40px;
-      padding: 14px 28px;
-      font-size: 16px;
-      background: #111;
-      color: #fff;
-      border: 1px solid #444;
+      background: #1b2a41;
+      color: #e7eef7;
+      border: 1px solid #2b3c58;
+      padding: 10px 14px;
       border-radius: 10px;
+      font-weight: 600;
       cursor: pointer;
-    }
-
-    button:active {
-      transform: scale(0.98);
-    }
-
-    audio {
-      display: none;
     }
   </style>
 </head>
-
 <body>
-  <h1>Re-orient</h1>
 
-  <audio id="audio" preload="auto">
-    <source src="reorient.mp3" type="audio/mpeg" />
-  </audio>
+  <div class="wrap">
+    <h1>Re-orient</h1>
+    <p>Obnovení základní orientace. Bez interpretace. Jedna další jasná akce.</p>
 
-  <button id="restartBtn">Spustit znovu</button>
+    <audio id="audio" src="reorient.mp3" preload="metadata"></audio>
 
-  <script>
-    const audio = document.getElementById("audio");
-    const restartBtn = document.getElementById("restartBtn");
+    <button onclick="document.getElementById('audio').play()">
+      Přehrát
+    </button>
+  </div>
 
-    window.addEventListener("load", () => {
-      audio.play().catch(() => {});
-    });
-
-    restartBtn.addEventListener("click", () => {
-      audio.currentTime = 0;
-      audio.play();
-    });
-  </script>
 </body>
 </html>
