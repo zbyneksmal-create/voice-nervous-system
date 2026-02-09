@@ -1,54 +1,160 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Re-orient</title>
-  <meta name="theme-color" content="#0b0f14">
-  <style>
-    body {
-      margin: 0;
-      background: #0b0f14;
-      color: #e7eef7;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-    }
-    .wrap {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    h1 {
-      margin: 0 0 8px;
-      font-size: 22px;
-    }
-    p {
-      margin: 0 0 16px;
-      color: #b7c6da;
-      line-height: 1.5;
-    }
-    button {
-      background: #1b2a41;
-      color: #e7eef7;
-      border: 1px solid #2b3c58;
-      padding: 10px 14px;
-      border-radius: 10px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#000000">
+<title>Re-orient</title>
+
+<style>
+:root {
+  --bg: #000;
+  --fg: #fff;
+  --card: #111;
+  --border: #333;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* horní oblast */
+.top {
+  padding: 24px 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.back {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  padding: 22px;
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  background: var(--card);
+  color: var(--fg);
+  text-decoration: none;
+}
+
+/* střed */
+.middle {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* spodní oblast */
+.bottom {
+  padding: 24px 16px 32px;
+}
+
+.controls {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.play {
+  width: 100%;
+  padding: 32px;
+  font-size: 34px;
+  font-weight: 800;
+  border-radius: 20px;
+  border: 2px solid var(--border);
+  background: var(--card);
+  color: var(--fg);
+}
+
+.play:active {
+  transform: scale(0.97);
+}
+
+.hint {
+  margin-top: 14px;
+  font-size: 18px;
+  opacity: 0.85;
+  text-align: center;
+}
+
+audio {
+  display: none;
+}
+</style>
 </head>
+
 <body>
 
-  <div class="wrap">
-    <h1>Re-orient</h1>
-    <p>Obnovení základní orientace. Bez interpretace. Jedna další jasná akce.</p>
+<!-- ZPĚT DO MENU -->
+<div class="top">
+  <a class="back" href="../">← Zpět do menu</a>
+</div>
 
-    <audio id="audio" src="reorient.mp3" preload="metadata"></audio>
+<!-- NÁZEV -->
+<div class="middle">
+  <div class="title">Re-orient</div>
+</div>
 
-    <button onclick="document.getElementById('audio').play()">
-      Přehrát
-    </button>
+<!-- OVLÁDÁNÍ DOLE -->
+<div class="bottom">
+  <div class="controls">
+    <button id="toggle" class="play">SPUSTIT</button>
+    <div class="hint">
+      Klepni 1×: spustit · Klepni znovu: pauza
+    </div>
+    <audio id="audio" preload="auto">
+      <source src="reorient.mp3" type="audio/mpeg">
+    </audio>
   </div>
+</div>
+
+<script>
+const audio = document.getElementById("audio");
+const btn = document.getElementById("toggle");
+let playing = false;
+
+function update() {
+  btn.textContent = playing ? "PAUZA" : "SPUSTIT";
+}
+
+btn.addEventListener("click", async () => {
+  try {
+    if (!playing) {
+      await audio.play();
+      playing = true;
+    } else {
+      audio.pause();
+      playing = false;
+    }
+    update();
+  } catch (e) {
+    playing = false;
+    update();
+  }
+});
+
+audio.addEventListener("ended", () => {
+  playing = false;
+  update();
+});
+
+update();
+</script>
 
 </body>
 </html>
