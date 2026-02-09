@@ -14,19 +14,19 @@ body {
   font-family: system-ui, sans-serif;
 }
 
-/* horní lišta – název + zpět */
-.top {
-  padding: 16px;
-  border-bottom: 1px solid #222;
+/* horní lišta */
+.header {
   display: flex;
   align-items: center;
-  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid #222;
 }
 
 .back {
   font-size: 28px;
   text-decoration: none;
   color: #fff;
+  margin-right: 16px;
 }
 
 .title {
@@ -36,17 +36,17 @@ body {
 
 /* obsah */
 .container {
-  padding: 24px 16px;
   max-width: 360px;
   margin: 0 auto;
+  padding: 40px 16px;
   text-align: center;
 }
 
 button {
   width: 100%;
   padding: 22px;
-  margin-bottom: 18px;
   font-size: 22px;
+  margin-bottom: 24px;
   border-radius: 16px;
   border: 1px solid #333;
   background: #111;
@@ -61,39 +61,35 @@ button:active {
 
 <body>
 
-<!-- horní část -->
-<div class="top">
-  <a class="back" href="../" aria-label="Zpět do menu">⬅</a>
+<div class="header">
+  <a class="back" href="../" aria-label="Zpět">←</a>
   <div class="title">Stabilizace</div>
 </div>
 
-<!-- hlavní část -->
 <div class="container">
+  <button id="toggle">▶ Spustit</button>
 
-<button id="play">▶ Spustit</button>
-<button id="pause">⏸ Pauza</button>
-<button id="stop">⏹ Zastavit</button>
-
-<audio id="audio">
-  <source src="stabilize.mp3" type="audio/mpeg">
-</audio>
-
+  <audio id="audio" preload="auto">
+    <source src="stabilize.mp3" type="audio/mpeg">
+  </audio>
 </div>
 
 <script>
 const audio = document.getElementById("audio");
+const toggle = document.getElementById("toggle");
 
-document.getElementById("play").onclick = () => {
-  audio.play();
-};
+let playing = false;
 
-document.getElementById("pause").onclick = () => {
-  audio.pause();
-};
-
-document.getElementById("stop").onclick = () => {
-  audio.pause();
-  audio.currentTime = 0;
+toggle.onclick = () => {
+  if (!playing) {
+    audio.play();
+    toggle.textContent = "⏸ Pauza";
+    playing = true;
+  } else {
+    audio.pause();
+    toggle.textContent = "▶ Spustit";
+    playing = false;
+  }
 };
 </script>
 
