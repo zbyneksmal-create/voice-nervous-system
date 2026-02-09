@@ -1,96 +1,112 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-<meta name="theme-color" content="#000000">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#000000" />
 <title>Stabilizace</title>
 
 <style>
-body {
-  margin: 0;
-  background: #000;
-  color: #fff;
-  font-family: system-ui, sans-serif;
-}
+  body {
+    margin: 0;
+    background: #000;
+    color: #fff;
+    font-family: system-ui, -apple-system, sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
 
-/* horní lišta */
-.header {
-  display: flex;
-  align-items: center;
-  padding: 16px;
-  border-bottom: 1px solid #222;
-}
+  /* horní lišta */
+  .header {
+    position: relative;
+    height: 72px;
+    border-bottom: 1px solid #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-.back {
-  font-size: 28px;
-  text-decoration: none;
-  color: #fff;
-  margin-right: 16px;
-}
+  .back {
+    position: absolute;
+    left: 16px;
+    font-size: 36px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 700;
+  }
 
-.title {
-  font-size: 22px;
-  font-weight: 500;
-}
+  .title {
+    font-size: 26px;
+    font-weight: 600;
+  }
 
-/* obsah */
-.container {
-  max-width: 360px;
-  margin: 0 auto;
-  padding: 40px 16px;
-  text-align: center;
-}
+  /* hlavní prostor */
+  .content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-button {
-  width: 100%;
-  padding: 22px;
-  font-size: 22px;
-  margin-bottom: 24px;
-  border-radius: 16px;
-  border: 1px solid #333;
-  background: #111;
-  color: #fff;
-}
+  /* spodní ovládání */
+  .controls {
+    padding: 24px 16px;
+  }
 
-button:active {
-  transform: scale(0.97);
-}
+  button {
+    width: 100%;
+    padding: 32px;
+    font-size: 28px;
+    font-weight: 700;
+    border-radius: 18px;
+    border: 2px solid #333;
+    background: #111;
+    color: #fff;
+  }
+
+  button:active {
+    transform: scale(0.98);
+  }
 </style>
 </head>
 
 <body>
 
-<div class="header">
-  <a class="back" href="../" aria-label="Zpět">←</a>
-  <div class="title">Stabilizace</div>
-</div>
+  <!-- horní lišta -->
+  <div class="header">
+    <a class="back" href="../" aria-label="Zpět do menu">←</a>
+    <div class="title">Stabilizace</div>
+  </div>
 
-<div class="container">
-  <button id="toggle">▶ Spustit</button>
+  <!-- prázdný střed (klid, žádný chaos) -->
+  <div class="content"></div>
+
+  <!-- spodní ovládání -->
+  <div class="controls">
+    <button id="play">SPUSTIT</button>
+  </div>
 
   <audio id="audio" preload="auto">
-    <source src="stabilize.mp3" type="audio/mpeg">
+    <source src="stabilize.mp3" type="audio/mpeg" />
   </audio>
-</div>
 
 <script>
-const audio = document.getElementById("audio");
-const toggle = document.getElementById("toggle");
+  const audio = document.getElementById("audio");
+  const btn = document.getElementById("play");
+  let playing = false;
 
-let playing = false;
-
-toggle.onclick = () => {
-  if (!playing) {
-    audio.play();
-    toggle.textContent = "⏸ Pauza";
-    playing = true;
-  } else {
-    audio.pause();
-    toggle.textContent = "▶ Spustit";
-    playing = false;
-  }
-};
+  btn.onclick = () => {
+    if (!playing) {
+      audio.play();
+      btn.textContent = "PAUZA";
+      playing = true;
+    } else {
+      audio.pause();
+      btn.textContent = "SPUSTIT";
+      playing = false;
+    }
+  };
 </script>
 
 </body>
