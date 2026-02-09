@@ -1,157 +1,160 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-  <meta name="theme-color" content="#000000" />
-  <title>Zastavit přetížení</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#000000">
+<title>Stabilizace</title>
 
-  <style>
-    :root {
-      --bg: #000;
-      --fg: #fff;
-      --card: #111;
-      --border: #333;
-    }
+<style>
+:root {
+  --bg: #000;
+  --fg: #fff;
+  --card: #111;
+  --border: #333;
+}
 
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--fg);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-    /* horní lišta */
-    .toolbar {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: var(--bg);
-      border-bottom: 2px solid var(--border);
-      padding: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-    }
+/* horní oblast */
+.top {
+  padding: 24px 16px;
+  display: flex;
+  justify-content: center;
+}
 
-    .back {
-      position: absolute;
-      left: 14px;
-      display: block;
-      padding: 12px 18px;
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--fg);
-      text-decoration: none;
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      background: var(--card);
-    }
+.back {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  padding: 22px;
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  background: var(--card);
+  color: var(--fg);
+  text-decoration: none;
+}
 
-    .title {
-      font-size: 22px;
-      font-weight: 800;
-      text-align: center;
-      letter-spacing: 0.5px;
-    }
+/* střed */
+.middle {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    /* obsah */
-    .wrap {
-      max-width: 520px;
-      margin: 0 auto;
-      padding: 28px 16px 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+}
 
-    /* hlavní tlačítko */
-    .big-btn {
-      width: 100%;
-      padding: 28px 20px;
-      font-size: 28px;
-      font-weight: 800;
-      border-radius: 20px;
-      border: 2px solid var(--border);
-      background: var(--card);
-      color: var(--fg);
-      cursor: pointer;
-      text-align: center;
-    }
+/* spodní oblast */
+.bottom {
+  padding: 24px 16px 32px;
+}
 
-    .big-btn:active {
-      transform: scale(0.97);
-    }
+.controls {
+  max-width: 420px;
+  margin: 0 auto;
+}
 
-    .hint {
-      text-align: center;
-      font-size: 16px;
-      opacity: 0.7;
-      line-height: 1.4;
-    }
+.play {
+  width: 100%;
+  padding: 32px;
+  font-size: 34px;
+  font-weight: 800;
+  border-radius: 20px;
+  border: 2px solid var(--border);
+  background: var(--card);
+  color: var(--fg);
+}
 
-    /* skryj defaultní audio ovladače */
-    audio {
-      display: none;
-    }
-  </style>
+.play:active {
+  transform: scale(0.97);
+}
+
+.hint {
+  margin-top: 14px;
+  font-size: 18px;
+  opacity: 0.85;
+  text-align: center;
+}
+
+audio {
+  display: none;
+}
+</style>
 </head>
 
 <body>
 
-  <!-- horní lišta -->
-  <div class="toolbar">
-    <a class="back" href="../" aria-label="Zpět do menu">◀</a>
-    <div class="title">Zastavit přetížení</div>
-  </div>
+<!-- ZPĚT DO MENU -->
+<div class="top">
+  <a class="back" href="../">← Zpět do menu</a>
+</div>
 
-  <!-- obsah -->
-  <div class="wrap">
-    <button id="toggle" class="big-btn">SPUSTIT</button>
+<!-- NÁZEV -->
+<div class="middle">
+  <div class="title">Stabilizace</div>
+</div>
+
+<!-- OVLÁDÁNÍ DOLE -->
+<div class="bottom">
+  <div class="controls">
+    <button id="toggle" class="play">SPUSTIT</button>
     <div class="hint">
-      Klepni jednou pro spuštění.<br>
-      Klepni znovu pro zastavení.
+      Klepni 1×: spustit · Klepni znovu: pauza
     </div>
-
     <audio id="audio" preload="auto">
       <source src="stabilize.mp3" type="audio/mpeg">
     </audio>
   </div>
+</div>
 
-  <script>
-    const audio = document.getElementById("audio");
-    const btn = document.getElementById("toggle");
-    let playing = false;
+<script>
+const audio = document.getElementById("audio");
+const btn = document.getElementById("toggle");
+let playing = false;
 
-    function updateLabel() {
-      btn.textContent = playing ? "ZASTAVIT" : "SPUSTIT";
-    }
+function update() {
+  btn.textContent = playing ? "PAUZA" : "SPUSTIT";
+}
 
-    btn.addEventListener("click", async () => {
-      try {
-        if (!playing) {
-          await audio.play();
-          playing = true;
-        } else {
-          audio.pause();
-          audio.currentTime = 0;
-          playing = false;
-        }
-        updateLabel();
-      } catch (e) {
-        playing = false;
-        updateLabel();
-      }
-    });
-
-    audio.addEventListener("ended", () => {
+btn.addEventListener("click", async () => {
+  try {
+    if (!playing) {
+      await audio.play();
+      playing = true;
+    } else {
+      audio.pause();
       playing = false;
-      updateLabel();
-    });
+    }
+    update();
+  } catch (e) {
+    playing = false;
+    update();
+  }
+});
 
-    updateLabel();
-  </script>
+audio.addEventListener("ended", () => {
+  playing = false;
+  update();
+});
+
+update();
+</script>
 
 </body>
 </html>
