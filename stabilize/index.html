@@ -1,57 +1,135 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#000000">
-<title>Klid</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#000000" />
+  <title>Zastavit přetížení</title>
 
-<style>
-body {
-  margin: 0;
-  background: #000;
-  color: #fff;
-  font-family: system-ui, -apple-system, sans-serif;
-}
+  <style>
+    :root { --bg:#000; --fg:#fff; --card:#111; --bd:#333; }
+    body{
+      margin:0; background:var(--bg); color:var(--fg);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
 
-.wrapper {
-  max-width: 420px;
-  margin: 0 auto;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
+    /* Horní lišta – VELKÉ tlačítko zpět + název uprostřed */
+    .topbar{
+      position: sticky; top:0; z-index:10;
+      background:#000;
+      border-bottom:2px solid #222;
+      padding:14px 12px;
+      display:flex; align-items:center; justify-content:center;
+      gap:12px;
+    }
+    .back{
+      flex: 0 0 auto;
+      display:inline-block;
+      padding:14px 16px;
+      font-size:22px;
+      font-weight:800;
+      border-radius:14px;
+      border:2px solid var(--bd);
+      background:var(--card);
+      color:var(--fg);
+      text-decoration:none;
+      line-height:1;
+      min-width:72px;
+      text-align:center;
+    }
+    .title{
+      flex:1 1 auto;
+      text-align:center;
+      font-size:22px;
+      font-weight:800;
+      letter-spacing:0.2px;
+    }
+    .spacer{ flex:0 0 72px; } /* aby titul zůstal uprostřed */
 
-.item {
-  display: block;
-  padding: 26px;
-  font-size: 24px;
-  font-weight: 700;
-  text-align: center;
-  border-radius: 18px;
-  border: 2px solid #333;
-  background: #111;
-  color: #fff;
-  text-decoration: none;
-}
+    /* Obsah */
+    .wrap{
+      max-width:520px;
+      margin:0 auto;
+      padding:18px 14px 28px;
+    }
 
-.item:active {
-  transform: scale(0.98);
-}
-</style>
+    /* Jeden velký ovladač – Play/Pause toggle */
+    .bigbtn{
+      width:100%;
+      display:block;
+      padding:26px 18px;
+      font-size:28px;
+      font-weight:900;
+      border-radius:18px;
+      border:2px solid var(--bd);
+      background:var(--card);
+      color:var(--fg);
+      cursor:pointer;
+      text-align:center;
+    }
+    .bigbtn:active{ transform: scale(0.99); }
+
+    .hint{
+      margin-top:14px;
+      opacity:0.75;
+      font-size:14px;
+      text-align:center;
+    }
+
+    /* skryjeme defaultní audio ovládání */
+    audio{ display:none; }
+  </style>
 </head>
 
 <body>
+  <div class="topbar">
+    <a class="back" href="../" aria-label="Zpět do menu">⟵</a>
+    <div class="title">Zastavit přetížení</div>
+    <div class="spacer"></div>
+  </div>
 
-<div class="wrapper">
+  <div class="wrap">
+    <button id="toggle" class="bigbtn">SPUSTIT</button>
+    <div class="hint">Klepni jednou: spustit. Klepni znovu: pauza.</div>
 
-  <a class="item" href="./re-orient/">Zorientovat se</a>
-  <a class="item" href="./release/">Uvolnit napětí</a>
-  <a class="item" href="./transition/">Další krok</a>
-  <a class="item" href="./night-reset/">Klid před spánkem</a>
+    <audio id="audio" preload="auto">
+      <!-- DŮLEŽITÉ: soubor se musí jmenovat přesně stabilize.mp3 a být ve složce /stabilize/ -->
+      <source src="stabilize.mp3" type="audio/mpeg" />
+    </audio>
+  </div>
 
-</div>
+  <script>
+    const audio = document.getElementById("audio");
+    const btn = document.getElementById("toggle");
+    let playing = false;
 
+    function setLabel() {
+      btn.textContent = playing ? "PAUZA" : "SPUSTIT";
+    }
+
+    btn.addEventListener("click", async () => {
+      try {
+        if (!playing) {
+          await audio.play();
+          playing = true;
+        } else {
+          audio.pause();
+          playing = false;
+        }
+        setLabel();
+      } catch (e) {
+        // když by prohlížeč blokoval přehrání, uživatel musí znovu klepnout
+        playing = false;
+        setLabel();
+      }
+    });
+
+    audio.addEventListener("ended", () => {
+      playing = false;
+      setLabel();
+    });
+
+    setLabel();
+  </script>
 </body>
 </html>
