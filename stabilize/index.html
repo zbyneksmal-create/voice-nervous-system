@@ -12,30 +12,51 @@ body {
   background: #000;
   color: #fff;
   font-family: system-ui, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
 }
 
+/* horní lišta */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: #000;
+  border-bottom: 1px solid #222;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  z-index: 10;
+}
+
+.back {
+  font-size: 26px;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 12px;
+}
+
+/* hlavní obsah */
 .container {
-  width: 100%;
-  max-width: 340px;
-  text-align: center;
+  margin-top: 80px;
   padding: 16px;
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 h1 {
-  font-size: 22px;
-  margin-bottom: 28px;
+  font-size: 24px;
+  margin-bottom: 32px;
 }
 
 button {
   width: 100%;
-  padding: 18px;
-  margin-bottom: 14px;
-  font-size: 20px;
-  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  font-size: 22px;
+  border-radius: 14px;
   border: 1px solid #333;
   background: #111;
   color: #fff;
@@ -44,30 +65,23 @@ button {
 button:active {
   transform: scale(0.98);
 }
-
-.back {
-  margin-top: 20px;
-}
-
-.back a {
-  color: #888;
-  font-size: 18px;
-  text-decoration: none;
-}
 </style>
 </head>
 
 <body>
+
+<!-- horní lišta -->
+<div class="header">
+  <a class="back" href="../" aria-label="Zpět do menu">⬅</a>
+</div>
+
+<!-- obsah -->
 <div class="container">
 
 <h1>Zastavit přetížení</h1>
 
 <button id="playPause">▶ Přehrát</button>
 <button id="stop">⏹ Zastavit</button>
-
-<div class="back">
-  <a href="../">← Zpět do menu</a>
-</div>
 
 <audio id="audio" preload="auto">
   <source src="stabilize.mp3" type="audio/mpeg">
