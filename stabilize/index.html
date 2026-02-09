@@ -12,41 +12,40 @@
     background: #000;
     color: #fff;
     font-family: system-ui, -apple-system, sans-serif;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
   }
 
-  /* horní lišta */
-  .header {
-    position: relative;
-    height: 72px;
-    border-bottom: 1px solid #222;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .back {
-    position: absolute;
-    left: 16px;
-    font-size: 36px;
-    text-decoration: none;
-    color: #fff;
-    font-weight: 700;
-  }
-
-  .title {
-    font-size: 26px;
-    font-weight: 600;
-  }
-
-  /* hlavní prostor */
-  .content {
+  .wrapper {
     flex: 1;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    padding: 16px;
+    gap: 20px;
+  }
+
+  /* univerzální senior tlačítko */
+  .block {
+    width: 100%;
+    padding: 26px;
+    font-size: 28px;
+    font-weight: 700;
+    border-radius: 16px;
+    border: 2px solid #333;
+    background: #111;
+    color: #fff;
+    text-align: center;
+  }
+
+  .block:active {
+    transform: scale(0.98);
+  }
+
+  /* název – stejný styl jako tlačítko */
+  .title {
+    background: #000;
+    border: 2px solid #333;
   }
 
   /* spodní ovládání */
@@ -54,37 +53,32 @@
     padding: 24px 16px;
   }
 
-  button {
-    width: 100%;
-    padding: 32px;
-    font-size: 28px;
-    font-weight: 700;
-    border-radius: 18px;
-    border: 2px solid #333;
-    background: #111;
-    color: #fff;
-  }
-
-  button:active {
-    transform: scale(0.98);
+  .play {
+    padding: 36px;
+    font-size: 32px;
+    font-weight: 800;
   }
 </style>
 </head>
 
 <body>
 
-  <!-- horní lišta -->
-  <div class="header">
-    <a class="back" href="../" aria-label="Zpět do menu">←</a>
-    <div class="title">Stabilizace</div>
+  <div class="wrapper">
+
+    <!-- ZPĚT DO MENU -->
+    <a href="../" class="block">← Zpět do menu</a>
+
+    <!-- NÁZEV -->
+    <div class="block title">Stabilizace</div>
+
+    <!-- klidový prostor -->
+    <div style="flex:1;"></div>
+
   </div>
 
-  <!-- prázdný střed (klid, žádný chaos) -->
-  <div class="content"></div>
-
-  <!-- spodní ovládání -->
+  <!-- OVLÁDÁNÍ DOLE -->
   <div class="controls">
-    <button id="play">SPUSTIT</button>
+    <button id="play" class="block play">SPUSTIT</button>
   </div>
 
   <audio id="audio" preload="auto">
