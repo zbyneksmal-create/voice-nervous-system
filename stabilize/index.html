@@ -1,39 +1,106 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="utf-8">
-  <title>Stabilizace</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      margin: 0;
-      background: #000;
-      color: #fff;
-      font-family: system-ui, sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      gap: 16px;
-      text-align: center;
-    }
-    audio { width: 280px; }
-    a {
-      color: #888;
-      font-size: 14px;
-      text-decoration: none;
-      margin-top: 24px;
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#000000">
+<title>Zastavit přetížení</title>
+
+<style>
+body {
+  margin: 0;
+  background: #000;
+  color: #fff;
+  font-family: system-ui, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 340px;
+  text-align: center;
+  padding: 16px;
+}
+
+h1 {
+  font-size: 22px;
+  margin-bottom: 28px;
+}
+
+button {
+  width: 100%;
+  padding: 18px;
+  margin-bottom: 14px;
+  font-size: 20px;
+  border-radius: 12px;
+  border: 1px solid #333;
+  background: #111;
+  color: #fff;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.back {
+  margin-top: 20px;
+}
+
+.back a {
+  color: #888;
+  font-size: 18px;
+  text-decoration: none;
+}
+</style>
 </head>
+
 <body>
-  <h1>Zastavit přetížení</h1>
+<div class="container">
 
-  <audio controls>
-    <source src="stabilize.mp3" type="audio/mpeg">
-  </audio>
+<h1>Zastavit přetížení</h1>
 
-  <a href="../">Zpět</a>
+<button id="playPause">▶ Přehrát</button>
+<button id="stop">⏹ Zastavit</button>
+
+<div class="back">
+  <a href="../">← Zpět do menu</a>
+</div>
+
+<audio id="audio" preload="auto">
+  <source src="stabilize.mp3" type="audio/mpeg">
+</audio>
+
+</div>
+
+<script>
+const audio = document.getElementById("audio");
+const playPause = document.getElementById("playPause");
+const stopBtn = document.getElementById("stop");
+
+let playing = false;
+
+playPause.addEventListener("click", () => {
+  if (!playing) {
+    audio.play();
+    playPause.textContent = "⏸ Pauza";
+    playing = true;
+  } else {
+    audio.pause();
+    playPause.textContent = "▶ Přehrát";
+    playing = false;
+  }
+});
+
+stopBtn.addEventListener("click", () => {
+  audio.pause();
+  audio.currentTime = 0;
+  playPause.textContent = "▶ Přehrát";
+  playing = false;
+});
+</script>
+
 </body>
 </html>
